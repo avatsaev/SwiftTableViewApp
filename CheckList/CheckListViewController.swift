@@ -31,7 +31,7 @@ class CheckListViewController:  UIViewController,
         self.tableData = ["Red", "Yellow","Green", "Blue"]
         
         //Table view position
-        self.tableView = UITableView(frame: CGRectMake(0, 100, self.view.bounds.size.width, self.view.bounds.height), style: UITableViewStyle.Plain)
+        self.tableView = UITableView(frame: CGRectMake(0, 77, self.view.bounds.size.width, self.view.bounds.height), style: UITableViewStyle.Plain)
         
         //Define new Table view cell identifier
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "myCell")
@@ -43,22 +43,20 @@ class CheckListViewController:  UIViewController,
         self.view.addSubview(self.tableView)
         
         //position
-        self.textField = UITextField(frame: CGRectMake(0, 0, self.view.bounds.size.width, 100))
+        self.textField = UITextField(frame: CGRectMake(0, 45, self.view.bounds.size.width, 30))
         //background color
-        self.textField.backgroundColor = UIColor.grayColor()
+        self.textField.backgroundColor = UIColor.redColor()
         //register delegate (ex: handling keyboard behaviours for this text field)
         self.textField.delegate = self
+        
         //add to view
         self.view.addSubview(self.textField)
         
         // Do any additional setup after loading the view.
     }
-    
-    
-    
 
 
-    //datble view data source functions
+    //table view data source functions
     
     
     
@@ -76,18 +74,24 @@ class CheckListViewController:  UIViewController,
         return newCell;
     }
     
+    
     //text field delegate functions
     
-    
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //called when hit enter key
+    func textFieldShouldReturn(textField: UITextField!) -> Bool{
+        
+        self.tableData.append(textField.text) //add to data source
+        self.tableView.reloadData() //refresh table view
+        textField.resignFirstResponder() //hide keyboard
+        textField.text = "" //empty text field
+        
+        return true
     }
+
+    
+    
+    
+    
 
     /*
     // #pragma mark - Navigation

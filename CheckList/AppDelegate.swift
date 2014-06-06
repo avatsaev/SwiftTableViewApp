@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let rootVC: CheckListViewController = CheckListViewController(nibName: nil, bundle: nil)
         
+        self.window!.backgroundColor = UIColor.whiteColor()
+        
         self.window!.rootViewController = rootVC
         
         
