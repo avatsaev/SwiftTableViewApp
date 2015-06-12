@@ -14,14 +14,18 @@ class CheckListViewController:  UIViewController,
     
     var tableView: UITableView!
     var textField: UITextField!
-    var tableData = String[]()
+    var tableData = [String]()
     
     
     
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -60,16 +64,16 @@ class CheckListViewController:  UIViewController,
     
     
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableData.count; //number of cells
     }
     
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let newCell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
          as UITableViewCell
         
-        newCell.text = self.tableData[indexPath.row]
+        newCell.textLabel?.text = self.tableData[indexPath.row]
         
         return newCell;
     }
@@ -78,9 +82,9 @@ class CheckListViewController:  UIViewController,
     //text field delegate functions
     
     //called when hit enter key
-    func textFieldShouldReturn(textField: UITextField!) -> Bool{
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
         
-        self.tableData.append(textField.text) //add to data source
+        self.tableData.append(textField.text!) //add to data source
         self.tableView.reloadData() //refresh table view
         textField.resignFirstResponder() //hide keyboard
         textField.text = "" //empty text field
